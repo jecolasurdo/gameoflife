@@ -4,6 +4,7 @@
     3. Any live cell with two or three live neighbours lives on to the next generation.
     4. Any dead cell with exactly three live neighbours becomes a live cell.
 '''
+import random
 
 def main():
     m = generate_matrix()
@@ -13,9 +14,10 @@ def generate_matrix():
     '''
     creates a 20x20 matrix and randomly populates cells within the matrix.
     '''
+    random.seed(a=1)
     for r in range(20):
         for c in range(20):
-            print("row {} columns {}".format(r, c))
+            print("row {} columns {} value {}".format(r, c, random.randint(0,1)))
 
     return None
 
