@@ -67,7 +67,12 @@ def count_active_neighbors(neighbor_addresses, matrix):
     Inspects the cells at each of the 8 addresses, and returns the count of
     cells that are live.
     '''
+    live_neighbor_count = 0
+    for address in neighbor_addresses:
+        if matrix[address[0]][address[1]] == 0:
+            live_neighbor_count++ 
 
+    return live_neighbor_count
 
 def apply_rule_to_cell(cell, active_neighbor_count):
     '''
