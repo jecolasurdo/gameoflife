@@ -24,17 +24,26 @@ def generate_matrix():
 
     return matrix
 
+CELL_ACTIVE = " " + u'\u26aa' + " "
+CELL_INACTIVE = "   "
+BORDER_LEFT_RIGHT = u'\u2502' 
+CORNER_NW = u'\u250c'
+CORNER_NE = u'\u2510'
+CORNER_SW = u'\u2514'
+CORNER_SE = u'\u2518'
+BORDER_TOP_BOTTOM = u'\u2500'
+
 def draw_matrix(matrix):
     '''
     prints the supplied matrix to the screen
     '''
-    print(u'\u250c'.ljust(len(matrix)*3+1,u'\u2500') + u'\u2510')
+    print(CORNER_NW.ljust(len(matrix)*len(CELL_ACTIVE)+1, BORDER_TOP_BOTTOM) + CORNER_NE)
     for r in matrix:
-        print(u'\u2502', end="")
+        print(BORDER_LEFT_RIGHT, end="")
         for c in r:
-            print(" " + u'\u26aa' + " ", end="") if c == 1 else print("   ", end="")
-        print(u'\u2502')
-    print(u'\u2514'.ljust(len(matrix)*3+1,u'\u2500') + u'\u2518')
+            print(CELL_ACTIVE, end="") if c == 1 else print(CELL_INACTIVE, end="")
+        print(BORDER_LEFT_RIGHT)
+    print(CORNER_SW.ljust(len(matrix)*len(CELL_INACTIVE)+1, BORDER_TOP_BOTTOM) + CORNER_SE)
 
 if __name__ == '__main__':
     main()
