@@ -15,17 +15,20 @@ def generate_matrix():
     creates a 20x20 matrix and randomly populates cells within the matrix.
     '''
     random.seed(a=1)
+    matrix = []
     for r in range(20):
+        row = []
         for c in range(20):
-            print("row {} columns {} value {}".format(r, c, random.randint(0,1)))
+            row.append(random.randint(0,1))
+        matrix.append(row)
 
-    return None
+    return matrix
 
 def draw_matrix(matrix):
     '''
     prints the supplied matrix to the screen
     '''
-    print("done")
+    print(matrix)
 
 
 if __name__ == '__main__':
