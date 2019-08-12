@@ -4,6 +4,7 @@
     3. Any live cell with two or three live neighbours lives on to the next generation.
     4. Any dead cell with exactly three live neighbours becomes a live cell.
 '''
+
 import random
 
 
@@ -30,11 +31,11 @@ def generate_matrix():
 
 
 def evolve_matrix(matrix):
-    for r in matrix:
-        for c in r:
+    for r in range(20):
+        for c in range(20):
             neighbors = get_neighbor_addresses((r, c))
             active_neigbor_count = count_active_neighbors(
-                neighbor_addresses, matrix)
+                neighbors, matrix)
             cell_value = matrix[r][c]
             matrix[r][c] = apply_rule_to_cell(cell_value, active_neigbor_count)
     return matrix
@@ -51,14 +52,14 @@ def get_neighbor_addresses(cell):
     '''
     r, c = cell[0], cell[1]
 
-    return[(r-1, c-1),
-           (r-1, c+0),
-           (r-1, c+1),
-           (r-0, c-1),
-           (r-0, c+1),
-           (r+1, c-1),
-           (r+1, c+0),
-           (r+1, c+1)]
+    return [(r-1, c-1),
+            (r-1, c+0),
+            (r-1, c+1),
+            (r-0, c-1),
+            (r-0, c+1),
+            (r+1, c-1),
+            (r+1, c+0),
+            (r+1, c+1)]
 
 
 def count_active_neighbors(neighbor_addresses, matrix):
@@ -69,16 +70,18 @@ def count_active_neighbors(neighbor_addresses, matrix):
     '''
     live_neighbor_count = 0
     for address in neighbor_addresses:
-        if matrix[address[0]][address[1]] == 0:
-            live_neighbor_count++ 
-
+        if address[0] < 0 or address[1] < 0 or address[0] > 19 or address[1] > 19:
+            continue
+        if matrix[address[0]][address[1]] == 1:
+            live_neighbor_count += 1
     return live_neighbor_count
 
-def apply_rule_to_cell(cell, active_neighbor_count):
-    '''
-    return an int (0,1) representing the resultind state of the cell based on
-    the rules of the game of life.
-    '''
+
+def apply_rule_to_cell(cell_value, active_neighbor_count):
+    if active_neighbor_count == 3:
+        return 1
+    if active_neighbor_count not in [2, 3]:
+        return 0
 
 
 CELL_ACTIVE = " " + u'\u26aa' + " "
